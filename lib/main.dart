@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:kakao_flutter_sdk/all.dart';
+
+import 'package:ooo_app/widget/server_proxy.dart';
 
 import 'package:ooo_app/widget/bottom_bar.dart';
 import 'package:ooo_app/screen/market_screen.dart';
@@ -45,5 +46,11 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    ServerProxy.getInstance().initialize();
   }
 }

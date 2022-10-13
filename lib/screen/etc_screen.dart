@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:web_socket_channel/io.dart';
+import 'package:ooo_app/widget/server_proxy.dart';
 
 class EtcScreen extends StatefulWidget {
   _EtcScreenState createState() => _EtcScreenState();
 }
 
-class _EtcScreenState extends State<EtcScreen> {
+class _EtcScreenState extends State<EtcScreen> with IServerProxy {
   var _etcMenu = <Widget>[
     Container(
       color: Colors.white,
@@ -29,15 +28,10 @@ class _EtcScreenState extends State<EtcScreen> {
   @override
   void initState() {
     super.initState();
-    var ip = '';
-    var port = '8000';
-    final channel = IOWebSocketChannel.connect('ws://' + ip + port);
 
-    print("1");
+    ServerProxy.getInstance().registerServerProxy(this);
 
-    channel.sink.add('Hello!');
-
-    print("2");
+    ServerProxy.getInstance().send("zz");
   }
 
   @override
@@ -67,5 +61,10 @@ class _EtcScreenState extends State<EtcScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void onDataReceived(String _data) {
+    print("1234");
   }
 }
